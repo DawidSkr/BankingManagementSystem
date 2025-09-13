@@ -11,6 +11,7 @@ This is a simple banking management system built in C++ as part of my personal p
 ## 📚 Project Overview
 
 The system supports basic banking operations:
+- User registration and secure login, allowing users to create an account, log in securely with a password, and manage their banking operations
 - Creating a user with a unique 10-digit account number and an associated account with an optional initial balance
 - Making deposits (with validation)
 - Performing withdrawals (with balance and error checks)
@@ -27,6 +28,7 @@ The program now features an interactive command-line menu that allows users to:
 - View the current account balance
 - Display the full transaction history
 - Show the user’s unique 10-digit account number
+- Log Out to end the current user session
 - Exit the application gracefully
 
 This menu-driven interface improves usability by providing a simple and intuitive way to interact with the banking system.

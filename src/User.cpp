@@ -18,8 +18,8 @@ std::string User::generateRandomAccountNumber()
     return oss.str();
 }
 
-User::User(const std::string &userName, double initialBalance)
-    : name(userName), accountNumber(generateRandomAccountNumber()), account(initialBalance) {}
+User::User(const std::string &userName, const std::string &userPassword, double initialBalance)
+    : name(userName), password(userPassword), accountNumber(generateRandomAccountNumber()), account(initialBalance) {}
 
 std::string User::getName() const
 {
@@ -39,4 +39,9 @@ const Account &User::getAccount() const
 Account &User::getAccount()
 {
     return account;
+}
+
+bool User::checkPassword(const std::string &inputPassword) const
+{
+    return password == inputPassword;
 }
