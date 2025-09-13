@@ -1,0 +1,89 @@
+# VSCode settings
+.vscode/
+
+# Mac system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+
+# C++ build files
+*.o
+*.obj
+*.exe
+*.out
+*.a
+*.lib
+*.dll
+*.pdb
+*.idb
+*.ilk
+*.exp
+
+# Temporary files created by editors
+*~
+*.swp
+*.swo
+*.bak
+
+# Log files
+*.log
+
+# Debug and Release folders
+build/Debug/
+build/Release/
+Debug/
+Release/
+bin/
+out/
+
+# CMake build files
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+*.cmake
+
+# Makefile generated files
+Makefile
+*.make
+
+# Visual Studio files
+.vs/
+.vs2019/
+.vs2017/
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# CLion IDE files (JetBrains)
+.idea/
+
+# Xcode IDE files (for macOS)
+*.xcodeproj/
+*.xcworkspace/
+
+# JetBrains (IntelliJ, CLion, etc.)
+.idea/
+
+# Object files and core dumps
+*.ko
+*.core
+*.coredump
+
+# Package managers (npm, yarn, etc.)
+node_modules/
+yarn.lock
+package-lock.json
+
+# User-specific files (for Visual Studio, Xcode, etc.)
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# MSYS2, MinGW, and related build tools
+msys-*
+mingw32/
+mingw64/
