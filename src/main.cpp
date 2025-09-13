@@ -1,34 +1,119 @@
 #include "Account.h"
 #include <iostream>
+#include <limits>
+
+void showMenu()
+{
+    std::cout << "\n=== Banking Management System Menu ===\n";
+    std::cout << "1. Deposit\n";
+    std::cout << "2. Withdraw\n";
+    std::cout << "3. Show Balance\n";
+    std::cout << "4. Show Transaction History\n";
+    std::cout << "5. Exit\n";
+    std::cout << "Choose an option: ";
+}
+
+int getUserChoice()
+{
+    int choice;
+    std::cin >> choice;
+
+    if (std::cin.fail())
+    {
+        // Obsługa nieprawidłowego wejścia
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        return -1; // oznacza błędny wybór
+    }
+    return choice;
+}
+
+void handleDeposit(Account &account)
+{
+    std::cout << "Enter deposit description: ";
+    std::string desc;
+    std::cin.ignore(); // czyścimy bufor po poprzednim wejściu
+    std::getline(std::cin, desc);
+
+    std::cout << "Enter deposit amount: ";
+    double amount;
+    std::cin >> amount;
+
+    try
+    {
+        account.deposit(desc, amount);
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << "Error during deposit: " << e.what() << std::endl;
+    }
+}
+
+void handleWithdraw(Account &account)
+{
+    std::cout << "Enter withdrawal description: ";
+    std::string desc;
+    std::cin.ignore();
+    std::getline(std::cin, desc);
+
+    std::cout << "Enter withdrawal amount: ";
+    double amount;
+    std::cin >> amount;
+
+    try
+    {
+        account.withdraw(desc, amount);
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << "Error during withdrawal: " << e.what() << std::endl;
+    }
+}
+
+void showBalance(const Account &account)
+{
+    std::cout << "Current balance: " << account.getBalance() << " USD" << std::endl;
+}
+
+void showTransactionHistory(const Account &account)
+{
+    account.printTransactionHistory();
+}
 
 int main()
 {
     std::cout << "=== Banking Management System ===" << std::endl;
 
-    try
+    Account userAccount; // domyślny balans 1000.0
+
+    bool running = true;
+    while (running)
     {
-        // Create a new bank account with a default initial balance
-        Account userAccount;
+        showMenu();
+        int choice = getUserChoice();
 
-        // Make an initial deposit
-        userAccount.deposit("Initial deposit", 500.0);
-
-        // Perform a withdrawal
-        userAccount.withdraw("ATM Withdrawal", 200.0);
-
-        // Print all transaction history
-        userAccount.printTransactionHistory();
-
-        // Display the final account balance after all transactions
-        std::cout << "Final balance: " << userAccount.getBalance() << " USD" << std::endl;
-    }
-    catch (const std::invalid_argument &e)
-    {
-        std::cerr << "Error: Invalid argument - " << e.what() << std::endl;
-    }
-    catch (const std::out_of_range &e)
-    {
-        std::cerr << "Error: Out of range - " << e.what() << std::endl;
+        switch (choice)
+        {
+        case 1:
+            handleDeposit(userAccount);
+            break;
+        case 2:
+            handleWithdraw(userAccount);
+            break;
+        case 3:
+            showBalance(userAccount);
+            break;
+        case 4:
+            showTransactionHistory(userAccount);
+            break;
+        case 5:
+            std::cout << "Exiting program. Goodbye!" << std::endl;
+            running = false;
+            break;
+        default:
+            std::cerr << "Invalid option, please try again." << std::endl;
+            break;
+        }
     }
 
     return 0;
