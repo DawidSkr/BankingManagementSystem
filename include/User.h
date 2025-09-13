@@ -13,6 +13,7 @@ class User
 private:
     std::string name;          ///< User's full name
     std::string accountNumber; ///< Bank account number (unique identifier)
+    std::string password;      ///< User's password
     Account account;           ///< User's bank account
 
     /**
@@ -23,12 +24,17 @@ private:
 
 public:
     /**
+     * @brief Default constructor for User.
+     */
+    User() : name(""), password(""), accountNumber(generateRandomAccountNumber()), account(1000.0) {}
+
+    /**
      * @brief Constructs a User with a given name and optional initial balance.
      * Automatically generates a random 10-digit account number.
      * @param userName The name of the user.
      * @param initialBalance The starting balance for the account (default 1000.0).
      */
-    explicit User(const std::string &userName, double initialBalance = 1000.0);
+    explicit User(const std::string &userName, const std::string &userPassword, double initialBalance = 1000.0);
 
     /**
      * @brief Get the user's name.
@@ -49,6 +55,11 @@ public:
      * @brief Get the user's account (modifiable).
      */
     Account &getAccount();
+
+    /**
+     * @brief Check if the provided password matches the user's password.
+     * */
+    bool checkPassword(const std::string &password) const;
 };
 
 #endif // USER_H
