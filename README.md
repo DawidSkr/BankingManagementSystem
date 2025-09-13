@@ -11,7 +11,7 @@ This is a simple banking management system built in C++ as part of my personal p
 ## 📚 Project Overview
 
 The system supports basic banking operations:
-- Creating an account with an optional initial balance
+- Creating a user with a unique 10-digit account number and an associated account with an optional initial balance
 - Making deposits (with validation)
 - Performing withdrawals (with balance and error checks)
 - Tracking all transactions using a `Transaction` class with enum-based transaction types
@@ -26,6 +26,7 @@ The program now features an interactive command-line menu that allows users to:
 - Withdraw funds with validation and balance checks
 - View the current account balance
 - Display the full transaction history
+- Show the user’s unique 10-digit account number
 - Exit the application gracefully
 
 This menu-driven interface improves usability by providing a simple and intuitive way to interact with the banking system.
@@ -42,5 +43,5 @@ This project helped me practice:
 ## 🧪 How to Build and Run
 
 ```bash
-g++ src/main.cpp src/Account.cpp src/Transaction.cpp -Iinclude -o build/Release/BankingSystem.exe
+g++ src/main.cpp src/Account.cpp src/Transaction.cpp src/User.cpp -Iinclude -o build/Release/BankingSystem.exe
 ./build/Release/BankingSystem.exe
