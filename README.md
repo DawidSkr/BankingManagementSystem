@@ -18,6 +18,18 @@ The system supports basic banking operations:
 - Printing full transaction history to the console
 - Handling errors via exceptions (`std::invalid_argument`, `std::out_of_range`)
 
+## 🖥️ User Interaction (Menu System)
+
+The program now features an interactive command-line menu that allows users to:
+
+- Deposit funds with custom descriptions
+- Withdraw funds with validation and balance checks
+- View the current account balance
+- Display the full transaction history
+- Exit the application gracefully
+
+This menu-driven interface improves usability by providing a simple and intuitive way to interact with the banking system.
+
 ## 💡 Purpose
 
 This project helped me practice:
