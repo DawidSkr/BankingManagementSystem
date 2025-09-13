@@ -1,7 +1,9 @@
 #ifndef ACCOUNT_H
 #define ACCOUNT_H
 
+#include "Transaction.h"
 #include <iostream>
+#include <vector>
 #include <stdexcept>
 
 /**
@@ -10,7 +12,8 @@
 class Account
 {
 private:
-    double balance; ///< Current balance of the account
+    double balance;                              ///< Current balance of the account
+    std::vector<Transaction> transactionHistory; ///< List of all transactions performed
 
 public:
     /**
@@ -35,6 +38,11 @@ public:
      * @throws std::out_of_range if amount exceeds current balance.
      */
     void withdraw(const std::string &description, double amount);
+
+    /**
+     * @brief Prints the transaction history to the console.
+     */
+    void printTransactionHistory() const;
 
     /**
      * @brief Returns the current account balance.

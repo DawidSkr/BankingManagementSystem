@@ -16,6 +16,9 @@ int main()
         // Perform a withdrawal
         userAccount.withdraw("ATM Withdrawal", 200.0);
 
+        // Print all transaction history
+        userAccount.printTransactionHistory();
+
         // Display the final account balance after all transactions
         std::cout << "Final balance: " << userAccount.getBalance() << " USD" << std::endl;
     }

@@ -18,6 +18,8 @@ void Account::deposit(const std::string &description, double amount)
     }
 
     balance += amount;
+    Transaction transaction(TransactionType::Deposit, description, amount);
+    transactionHistory.push_back(transaction);
 
     std::cout << "[Deposit] New balance: " << balance << " USD" << std::endl;
 }
@@ -37,8 +39,25 @@ void Account::withdraw(const std::string &description, double amount)
     }
 
     balance -= amount;
+    Transaction transaction(TransactionType::Withdraw, description, amount);
+    transactionHistory.push_back(transaction);
 
     std::cout << "[Withdraw] New balance: " << balance << " USD" << std::endl;
+}
+
+void Account::printTransactionHistory() const
+{
+    std::cout << "=== Transaction History ===" << std::endl;
+    if (transactionHistory.empty())
+    {
+        std::cout << "No transactions found." << std::endl;
+        return;
+    }
+
+    for (const auto &transaction : transactionHistory)
+    {
+        transaction.printTransaction();
+    }
 }
 
 double Account::getBalance() const
