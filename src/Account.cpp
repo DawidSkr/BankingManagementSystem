@@ -64,3 +64,29 @@ double Account::getBalance() const
 {
     return balance;
 }
+
+void Account::writeToFile(std::ofstream &outFile) const
+{
+    outFile.write(reinterpret_cast<const char *>(&balance), sizeof(balance));
+    size_t historySize = transactionHistory.size();
+    outFile.write(reinterpret_cast<const char *>(&historySize), sizeof(historySize));
+
+    for (const auto &transaction : transactionHistory)
+    {
+        transaction.writeToFile(outFile);
+    }
+}
+
+void Account::readFromFile(std::ifstream &inFile)
+{
+    inFile.read(reinterpret_cast<char *>(&balance), sizeof(balance));
+
+    size_t historySize;
+    inFile.read(reinterpret_cast<char *>(&historySize), sizeof(historySize));
+
+    transactionHistory.clear();
+    for (size_t i = 0; i < historySize; ++i)
+    {
+        transactionHistory.push_back(Transaction::readFromFile(inFile));
+    }
+}

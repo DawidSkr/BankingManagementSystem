@@ -34,8 +34,10 @@ build/Debug/
 build/Release/
 Debug/
 Release/
-bin/
 out/
+
+bin/*
+!bin/
 
 # CMake build files
 CMakeCache.txt

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include <fstream>
 
 /**
  * @enum TransactionType
@@ -38,6 +39,18 @@ public:
      * @brief Prints the transaction details to the console.
      */
     void printTransaction() const;
+
+    /**
+     * @brief Writes transaction data to a binary file.
+     * @param outFile Output file stream to which the transaction data will be written.
+     */
+    void writeToFile(std::ofstream &outFile) const;
+
+    /**
+     * @brief Reads transaction data from a binary file.
+     * @param inFile Input file stream from which the transaction data will be read.
+     */
+    static Transaction readFromFile(std::ifstream &inFile);
 };
 
 #endif // TRANSACTION_H

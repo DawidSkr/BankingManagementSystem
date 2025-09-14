@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <stdexcept>
+#include <fstream>
 
 /**
  * @brief A simple bank account class supporting deposit and withdrawal operations.
@@ -48,6 +49,18 @@ public:
      * @brief Returns the current account balance.
      */
     double getBalance() const;
+
+    /**
+     * @brief Writes account data to a binary file.
+     * @param outFile Output file stream to which the account data will be written
+     */
+    void writeToFile(std::ofstream &outFile) const;
+
+    /**
+     * @brief Reads account data from a binary file.
+     * @param inFile Input file stream from which the account data will be read.
+     */
+    void readFromFile(std::ifstream &inFile);
 };
 
 #endif
