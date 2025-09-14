@@ -4,6 +4,10 @@
 #include <string>
 #include <limits>
 #include <unordered_map>
+#include <fstream>
+
+void saveUsersToFile(const std::string &filename);
+void loadUsersFromFile(const std::string &filename);
 
 std::unordered_map<std::string, User> users;
 
@@ -16,8 +20,9 @@ void showMenu()
     std::cout << "3. Show Balance\n";
     std::cout << "4. Show Transaction History\n";
     std::cout << "5. Show Account Number\n";
-    std::cout << "6. Log out\n";
-    std::cout << "7. Exit\n";
+    std::cout << "6. Save User to File\n";
+    std::cout << "7. Log out\n";
+    std::cout << "8. Exit\n";
     std::cout << "Choose an option: ";
 }
 // Gets the user's menu choice and validates input
@@ -112,6 +117,8 @@ void registerUser()
 
     users[newUser.getAccountNumber()] = newUser;
     std::cout << "Registration successful! Your account number is " << newUser.getAccountNumber() << std::endl;
+
+    saveUsersToFile("bin/users.dat");
 }
 
 // Function for user login
@@ -145,9 +152,58 @@ User *loginUser()
     }
 }
 
+// Function to save all users to a binary file
+void saveUsersToFile(const std::string &filename)
+{
+    std::ofstream outFile(filename, std::ios::binary);
+
+    if (!outFile)
+    {
+        std::cerr << "Error opening file for writing!" << std::endl;
+        return;
+    }
+
+    size_t userCount = users.size();
+    outFile.write(reinterpret_cast<const char *>(&userCount), sizeof(userCount));
+
+    for (const auto &userPair : users)
+    {
+        userPair.second.writeToFile(outFile);
+    }
+
+    outFile.close();
+    std::cout << "Users have been successfully saved to the file!" << std::endl;
+}
+
+// Function to load all users from a binary file
+void loadUsersFromFile(const std::string &filename)
+{
+    std::ifstream inFile(filename, std::ios::binary);
+
+    if (!inFile)
+    {
+        std::cerr << "Error opening file for reading!" << std::endl;
+        return;
+    }
+
+    size_t userCount;
+    inFile.read(reinterpret_cast<char *>(&userCount), sizeof(userCount));
+
+    for (size_t i = 0; i < userCount; ++i)
+    {
+        User user = User::readFromFile(inFile);
+        users[user.getAccountNumber()] = user;
+    }
+
+    inFile.close();
+    std::cout << "Users have been successfully loaded from the file!" << std::endl;
+}
+
 int main()
 {
     std::cout << "=== Banking Management System ===" << std::endl;
+
+    loadUsersFromFile("bin/users.dat");
 
     User *currentUser = nullptr;
 
@@ -207,11 +263,14 @@ int main()
                     showAccountNumber(*currentUser);
                     break;
                 case 6:
+                    saveUsersToFile("bin/users.dat");
+                    break;
+                case 7:
                     std::cout << "Logging out..." << std::endl;
                     currentUser = nullptr;
                     sessionRunning = false;
                     break;
-                case 7:
+                case 8:
                     std::cout << "Exiting program. Goodbye!" << std::endl;
                     running = false;
                     sessionRunning = false;

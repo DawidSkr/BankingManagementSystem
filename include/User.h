@@ -3,6 +3,7 @@
 
 #include "Account.h"
 #include <string>
+#include <fstream>
 
 /**
  * @class User
@@ -60,6 +61,16 @@ public:
      * @brief Check if the provided password matches the user's password.
      * */
     bool checkPassword(const std::string &password) const;
+
+    /**
+     * @brief Writes user data to a binary file.
+     */
+    void writeToFile(std::ofstream &outFile) const;
+
+    /**
+     * @brief Reads user data from a binary file.
+     */
+    static User readFromFile(std::ifstream &inFile);
 };
 
 #endif // USER_H

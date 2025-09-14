@@ -6,6 +6,7 @@ This is a simple banking management system built in C++ as part of my personal p
 
 - **Language:** C++
 - **Concepts:** OOP, enums, exception handling, header/source file separation, STL (std::vector)
+- **Features:** Binary file serialization (save/load users & accounts)
 - **Tools:** g++, CLI
 
 ## 📚 Project Overview
@@ -28,6 +29,7 @@ The program now features an interactive command-line menu that allows users to:
 - View the current account balance
 - Display the full transaction history
 - Show the user’s unique 10-digit account number
+- Save user data to a binary file for persistence
 - Log Out to end the current user session
 - Exit the application gracefully
 
